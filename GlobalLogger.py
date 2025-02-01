@@ -45,7 +45,7 @@ class GlobalLoggerManager:
 
         logger.setLevel(logging.DEBUG)
 
-        handlers: List[logging.Handler, logging.Handler] = self._get_logger_handlers(log_file_path)
+        handlers: List[logging.Handler] = self._get_logger_handlers(log_file_path)
         for handler in handlers:
             logger.addHandler(handler)
 

@@ -13,12 +13,9 @@ class AbstractVehicle(ABC):
         pass
 
 class Car(AbstractVehicle):
-    def drive(self):
+    def drive(self) -> str:
         return "The car left successfully"
 
 class Bike(AbstractVehicle):
-    def drive(self):
+    def drive(self) -> str:
         return "The bike left successfully"
-    
-if __name__ == '__main__':
-    print('VihicleClasses')
