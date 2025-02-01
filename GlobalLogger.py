@@ -28,11 +28,9 @@ class GlobalLoggerManager:
         self.logger_formatter_console: logging.Formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         self.logger_formatter_file: LoggerFormatterJSON = LoggerFormatterJSON()
     
-    def _get_logger_handlers(self) -> List[logging.Handler]:
-        load_dotenv()
-
+    def _get_logger_handlers(self, log_file_path: str) -> List[logging.Handler]:
         console_handler: logging.StreamHandler = logging.StreamHandler()
-        file_handler: logging.FileHandler = logging.FileHandler(os.getenv('LOG_FILE'))
+        file_handler: logging.FileHandler = logging.FileHandler(log_file_path)
 
         console_handler.setLevel(logging.DEBUG)
         file_handler.setLevel(logging.ERROR)
@@ -42,17 +40,22 @@ class GlobalLoggerManager:
 
         return [console_handler, file_handler]
         
-    def get_logger(self) -> logging.Logger:
-        logger: logging.Logger = logging.getLogger(os.getenv('APP_NAME'))
+    def get_logger(self, app_name: str, log_file_path: str) -> logging.Logger:
+        logger: logging.Logger = logging.getLogger(app_name)
 
         logger.setLevel(logging.DEBUG)
 
-        handlers: List[logging.Handler, logging.Handler] = self._get_logger_handlers()
+        handlers: List[logging.Handler, logging.Handler] = self._get_logger_handlers(log_file_path)
         for handler in handlers:
             logger.addHandler(handler)
 
         return logger
 
 if __name__ == '__main__':
-    logger = GlobalLoggerManager().get_logger()
-    logger.info('Logger successfall create')
+    load_dotenv()
+
+    app_name = os.getenv('APP_NAME')
+    log_file_path = os.getenv('LOG_FILE_PATH')
+
+    logger: logging.Logger = GlobalLoggerManager().get_logger(app_name, log_file_path)
+    logger.info('Logger created successfally')
