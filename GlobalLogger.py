@@ -8,6 +8,8 @@ from typing import List
 
 
 class LoggerFormatterJSON(logging.Formatter):
+    """Класс для форматирования данных логов"""
+    
     def formatTime(self, record: logging.LogRecord, datefmt: str = None) -> str:
         return datetime.fromtimestamp(record.created).strftime('%Y-%m-%d %H:%M:%S')
 

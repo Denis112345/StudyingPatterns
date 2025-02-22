@@ -19,11 +19,12 @@ if __name__ == '__main__':
     log_file_path: str = os.getenv('LOG_FILE_PATH')
 
     logger: logging.Logger = GlobalLoggerManager().get_logger(app_name, log_file_path)
-    logger.info('Programm started')
+
+    logger.info('Программа запущена')
     
     type_vehicel: str = input('Введите тип транспорта для запуска: ').lower()
 
-    logger.info('User input type vehical')
+    logger.info('Пользователь ввел тип транспорта')
 
     if type_vehicel.upper() in VehicleTypes.__members__:
         if type_vehicel == VehicleTypes.CAR.value:
@@ -40,7 +41,7 @@ if __name__ == '__main__':
 
             logger.info(info)
     else:
-        logger.warning('Please input valide type of Vehicle')
+        logger.warning('Пожалуйста введите валидный тип траспорта')
     
-    logger.info('Programm finished')
+    logger.info('Прогрмма законичла исполнение')
 
